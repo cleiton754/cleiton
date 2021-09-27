@@ -1,1 +1,67 @@
-
+name: Blank snippet
+description: Create a new snippet from a blank template.
+host: WORD
+api_set: {}
+script:
+  content: |-
+    const button = document.getElementById("button") as HTMLButtonElement;
+    document.getElementById("v1") as HTMLInputElement;
+    document.getElementById("v2") as HTMLInputElement;
+    document.getElementById("v3") as HTMLButtonElement;
+    document.getElementById("v4") as HTMLInputElement;
+    document.getElementById("v5") as HTMLInputElement;
+    button.addEventListener("click", () => {
+      Word.run(async (context) =>{
+        const body = context.document.body
+        const n1 = parseFloat(v1.value);
+        const n2 = parseFloat(v2.value);
+        const n3 = parseFloat(v3.value);
+        const n4 = parseFloat(v4.value);
+        const n5 = parseFloat(v5.value);
+        const ex1 = Math.pow(n1, 2);
+        const ex2 = Math.pow(n2, 2);
+        const ex3 = Math.pow(n3, 2);
+        const ex4 = Math.pow(n4, 2);
+        const ex5 = Math.pow(n5, 2);
+        result.innerText = "";
+        if (v1.value == "" || v2.value == "" || v3.value == "" || v4.value == "" || v5.value == "") {
+          body.insertText('Algum dos valores está em branco', 'Start')
+          return;
+        } else if (isNaN(n1) || isNaN(n2) || isNaN(n3) || isNaN(n4) || isNaN(n5)) {
+          body.insertText('Algum dos valores não é um numero', 'Start')
+          return;
+        }
+        body.insertText (` O quadrado de ${n1} é ${ex1} 
+                              O quadrado de ${n2} é ${ex2} 
+                              O quadrado de ${n3} é ${ex3} 
+                              O quadrado de ${n4} é ${ex4} 
+                              O quadrado de ${n5} é ${ex5} `, 'End')
+      });
+      })
+      
+  language: typescript
+template:
+  content: "<p><input id=\"v1\" placeholder = \"Digite o primeiro valor\"/></p>\n\t<p><input id=\"v2\" placeholder = \"Digite o segundo valor\"/></p>\n\t\t<p><input id=\"v3\" placeholder = \"Digite o terceiro valor\"/></p>\n\t\t\t<p><input id=\"v4\" placeholder = \"Digite o quarto valor\"/></p>\n\t\t\t\t<p><input id=\"v5\" placeholder = \"Digite o quinto valor\"/></p>\n\n\t\t\t\t\t<p><button id=\"button\">Clique</button></p>\n\n\t\t\t\t\t<p id=\"result\"></p>"
+  language: html
+style:
+  content: |-
+    input, button, p{
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input, button{
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  language: css
+libraries: |
+  https://appsforoffice.microsoft.com/lib/1/hosted/office.js
+  @types/office-js
+  office-ui-fabric-js@1.4.0/dist/css/fabric.min.css
+  office-ui-fabric-js@1.4.0/dist/css/fabric.components.min.css
+  core-js@2.4.1/client/core.min.js
+  @types/core-js
+  jquery@3.1.1
+  @types/jquery@3.3.1
